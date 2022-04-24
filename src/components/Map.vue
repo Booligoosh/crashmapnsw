@@ -1,5 +1,13 @@
 <template>
-  <l-map class="leaflet-container">
+  <l-map
+    class="leaflet-container"
+    :center="[
+      /* Centre of Sydney from OpenStreetMap https://www.openstreetmap.org/node/13766899 */
+      -33.8698439,
+      151.2082848,
+    ]"
+    :zoom="14"
+  >
     <l-tile-layer
       url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
       layer-type="base"
