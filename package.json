@@ -4,11 +4,18 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node fetchData.js && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "@mapbox/togeojson": "^0.16.0",
+    "@vue-leaflet/vue-leaflet": "^0.6.1",
+    "leaflet": "^1.8.0",
+    "sass": "^1.50.1",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.14",
+    "vuex": "^4.0.2",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",
