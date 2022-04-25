@@ -11,7 +11,7 @@
     <l-tile-layer
       url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
       layer-type="base"
-      name="Minimal"
+      name="Minimal map style"
       :min-zoom="0"
       :max-zoom="18"
       attribution="Map tiles by <a href='http://stamen.com'>Stamen Design</a>, <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a> &mdash; Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
@@ -21,9 +21,25 @@
     <l-tile-layer
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       layer-type="base"
-      name="Detailed"
+      name="Detailed map style"
       :max-zoom="19"
       attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+      :visible="false"
+    ></l-tile-layer>
+    <l-tile-layer
+      url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+      layer-type="base"
+      name="Cycling map style"
+      :max-zoom="20"
+      attribution="<a href='https://github.com/cyclosm/cyclosm-cartocss-style/releases' title='CyclOSM - Open Bicycle render'>CyclOSM</a> | Map data: &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+      :visible="false"
+    ></l-tile-layer>
+    <l-tile-layer
+      url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm-lite/{z}/{x}/{y}.png"
+      layer-type="overlay"
+      name="Show cycle infrastructure"
+      :max-zoom="20"
+      attribution="<a href='https://github.com/cyclosm/cyclosm-cartocss-style/releases' title='CyclOSM - Open Bicycle render'>CyclOSM</a> | Map data: &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
       :visible="false"
     ></l-tile-layer>
     <l-control-layers />
