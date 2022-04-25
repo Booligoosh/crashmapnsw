@@ -23,12 +23,7 @@
 
       <div>
         <dt>Weather</dt>
-        <dd>{{ crash.weather }}</dd>
-      </div>
-
-      <div>
-        <dt>Road condition</dt>
-        <dd>{{ crash.surfaceCondition }}</dd>
+        <dd>{{ crash.weather }}, {{ surfaceConditionText }}</dd>
       </div>
     </dl>
 
@@ -163,6 +158,19 @@ export default {
         case "Unknown / not stated":
         default:
           return "Street lighting unknown";
+      }
+    },
+    surfaceConditionText() {
+      switch (this.crash.surfaceCondition) {
+        case "Dry":
+          return "Road surface dry";
+        case "Wet":
+          return "Road surface wet";
+        case "Snow or ice":
+          return "Road surface snowy or icy";
+        case "Unknown / not stated":
+        default:
+          return "Road surface condition unknown";
       }
     },
   },
