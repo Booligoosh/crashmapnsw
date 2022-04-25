@@ -7,6 +7,7 @@
       151.2082848,
     ]"
     :zoom="14"
+    ref="map"
   >
     <l-tile-layer
       url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
@@ -58,6 +59,8 @@
       v-if="$store.state.routeCoords"
       :lat-lngs="$store.state.routeCoords"
       color="#4bc34b"
+      ref="route"
+      @ready="handleRouteReady"
     />
   </l-map>
 </template>
@@ -93,6 +96,13 @@ export default {
         (c) => c.lat === e.latlng.lat && c.lon === e.latlng.lng
       );
       this.$store.commit("setCurrentCrash", crash);
+    },
+    handleRouteReady() {
+      if (this.$refs.route && this.$refs.map) {
+        const bounds = this.$refs.route.leafletObject.getBounds();
+        const map = this.$refs.map.leafletObject;
+        map.flyToBounds(bounds);
+      }
     },
     getColorForDegree(degree) {
       switch (degree) {
