@@ -45,13 +45,8 @@
       </div>
 
       <div>
-        <dt>Speed limit</dt>
-        <dd>{{ crash.speedLimit }}</dd>
-      </div>
-
-      <div>
-        <dt>Road surface</dt>
-        <dd>{{ crash.roadSurface }}</dd>
+        <dt>Road type</dt>
+        <dd>{{ crash.speedLimit }}, {{ crash.roadSurface }}</dd>
       </div>
 
       <div>
