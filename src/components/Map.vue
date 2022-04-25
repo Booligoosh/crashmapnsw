@@ -31,7 +31,7 @@
       v-for="crash of crashes"
       :key="crash.id"
       :lat-lng="[crash.lat, crash.lon]"
-      :radius="8"
+      :radius="$store.state.currentCrash?.id === crash.id ? 14 : 8"
       @click="handleClick"
       :color="getColorForDegree(crash.deg)"
       :fill-color="getColorForDegree(crash.deg)"
