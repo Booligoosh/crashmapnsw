@@ -3,8 +3,8 @@
     <div class="sidebar-top">
       <h1 class="sidebar-top-logo">BikeSafe<span>NSW</span></h1>
     </div>
-    <FileUpload />
     <CrashDetails />
+    <FileUpload />
   </aside>
 </template>
 
@@ -37,8 +37,8 @@ export default {
     // --c2: #339af0;
     // --c3: #fab005;
     // --c4: #f76707;
-    color: white;
-    background: hsl(120deg, 50%, 53%);
+    // color: white;
+    background: hsl(120, 50%, 53%);
 
     &-logo {
       margin: 0;

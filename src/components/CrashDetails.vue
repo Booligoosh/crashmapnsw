@@ -175,6 +175,11 @@ export default {
 </script>
 
 <style lang="scss">
+.crash-details,
+.crash-details-placeholder {
+  flex-grow: 1;
+}
+
 .crash-details {
   overflow-y: auto;
   overflow-x: hidden;
@@ -211,6 +216,10 @@ export default {
         margin: 0;
       }
     }
+  }
+
+  h3 {
+    margin-top: 0;
   }
 
   h4 {
