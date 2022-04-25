@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "node fetchData.js && vite build",
+    "build": "node sliceRum.js && node fetchData.js && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -19,6 +19,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",
+    "canvas": "^2.9.1",
+    "image-clipper": "^0.4.4",
     "vite": "^2.9.5"
   }
 }

@@ -67,18 +67,6 @@
 
     <dl>
       <div>
-        <dt>Road user movement code</dt>
-        <dd>
-          {{ crash.rumCode }} (<a href="/rumTable.png" target="_blank"
-            >see table</a
-          >)
-        </dd>
-      </div>
-      <div>
-        <dt>Road user movement description</dt>
-        <dd>{{ crash.rumDescription }}</dd>
-      </div>
-      <div>
         <dt>Impact</dt>
         <dd>
           {{
@@ -95,6 +83,17 @@
           }}
         </dd>
       </div>
+      <div>
+        <dt>Road user movement</dt>
+        <dd>{{ crash.rumDescription }}</dd>
+      </div>
+      <img
+        :src="`/rum/${crash.rumCode}.png`"
+        :alt="crash.rumDescription"
+        width="141"
+        height="105"
+        class="rum-img"
+      />
     </dl>
 
     <div v-for="unit of crash.units" :key="unit.id" class="crash-participant">
@@ -242,6 +241,11 @@ export default {
     border-radius: 5px;
     margin-bottom: 0.5rem;
     padding: 0.5rem;
+  }
+
+  .rum-img {
+    display: block;
+    border: 1px solid;
   }
 }
 </style>
