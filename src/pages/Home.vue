@@ -17,7 +17,7 @@ export default {
 <style lang="scss">
 .home-page {
   display: grid;
-  grid-template-columns: 400px auto;
+  grid-template-columns: 401px auto;
   height: 100vh;
 
   > * {
