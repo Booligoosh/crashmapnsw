@@ -13,7 +13,7 @@
         target="_blank"
         >TfNSW</a
       >. Source code on
-      <a href="https://github.com/booligoosh/bikesafensw" target="_blank"
+      <a href="https://github.com/Booligoosh/crashmapnsw" target="_blank"
         >GitHub</a
       >. {{ isEmbed ? "" : "In beta 🚧" }}
     </div>
