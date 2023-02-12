@@ -18,7 +18,7 @@
       >. {{ isEmbed ? "" : "In beta 🚧" }}
     </div>
     <CrashDetails />
-    <FileUpload v-if="!isEmbed" />
+    <!-- <FileUpload v-if="!isEmbed" /> -->
   </aside>
 </template>
 
