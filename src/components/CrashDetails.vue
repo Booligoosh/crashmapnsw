@@ -125,7 +125,7 @@
       </dl>
     </div>
 
-    <details>
+    <details v-if="isDev">
       <summary>All attributes (dev)</summary>
       <pre>{{ JSON.stringify(crash, null, 2) }}</pre>
     </details>
@@ -141,6 +141,9 @@ export default {
   computed: {
     crash() {
       return this.$store.state.currentCrash;
+    },
+    isDev() {
+      return window.location.hostname === "localhost";
     },
     streetLightingText() {
       switch (this.crash.streetLighting) {
