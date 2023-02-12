@@ -8,7 +8,7 @@
     <p>
       The data was collected by
       <a
-        href="https://roadsafety.transport.nsw.gov.au/statistics/interactivecrashstats/lga_stats.html"
+        href="https://roadsafety.transport.nsw.gov.au/statistics/interactivecrashstats/lga_stats.html?r=eyJrIjoiMDA3OGRhN2UtZjRkNy00N2JmLWE0MjMtZmIyNzFiOTdmMjI3IiwidCI6ImNiMzU2NzgyLWFkOWEtNDdmYi04NzhiLTdlYmNlYjg1Yjg2YyJ9&pageName=ReportSectiona5a83b637554074c1384"
         target="_blank"
         >Transport for NSW</a
       >. It only includes crashes that were reported to the police and involved
