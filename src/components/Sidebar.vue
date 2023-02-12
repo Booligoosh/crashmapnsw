@@ -15,7 +15,7 @@
       >. Source code on
       <a href="https://github.com/booligoosh/bikesafensw" target="_blank"
         >GitHub</a
-      >. In beta 🚧
+      >. {{ isEmbed ? "" : "In beta 🚧" }}
     </div>
     <CrashDetails />
     <FileUpload v-if="!isEmbed" />
