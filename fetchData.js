@@ -74,8 +74,10 @@ const crashes = crashData
       })
     ),
     // All values, for development purposes. Remove later:
-    data: crashRow,
-    unitData: trafficUnitsByCrashId[crashRow["Crash ID"]] || [],
+    data: process.env.DEVELOPMENT ? crashRow : undefined,
+    unitData: process.env.DEVELOPMENT
+      ? trafficUnitsByCrashId[crashRow["Crash ID"]] || []
+      : undefined,
   }));
 console.timeEnd("Map crashes");
 console.time("Write crashes file");
