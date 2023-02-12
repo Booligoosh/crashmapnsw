@@ -15,10 +15,17 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../global.scss";
+
 .home-page {
   display: grid;
   grid-template-columns: 401px auto;
   height: 100vh;
+
+  @media screen and (max-width: $floating-sidebar-breakpoint) {
+    grid-template-columns: auto;
+    height: calc(100vh - $floating-sidebar-collapse-btn-height);
+  }
 
   > * {
     height: 100vh;
