@@ -32,7 +32,7 @@ const crashes = crashData
     suburb: capitalise(crashRow["Town"]),
     month: crashRow["Month of crash"],
     year: crashRow["Year of crash"],
-    time: crashRow["Time of crash - Two-hour intervals"],
+    time: crashRow["Two-hour intervals"],
     dayOfWeek: crashRow["Day of week of crash"],
     locationType: crashRow["Type of location"],
     permanentFeat: crashRow["Primary permanent feature"],
