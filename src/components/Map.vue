@@ -11,6 +11,7 @@
     :options="{ preferCanvas: true }"
     ref="map"
     @ready="updateMapMarkers"
+    @click="handleClick"
   >
     <l-tile-layer
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -91,18 +92,33 @@ export default {
   },
   methods: {
     handleClick(e) {
+      // https://github.com/vue-leaflet/vue-leaflet/issues/220#issuecomment-1220709915
+      if (!e.latlng) return;
+
+      // https://github.com/Leaflet/Leaflet/issues/4882#issuecomment-244751897
+      L.DomEvent.stopPropagation(e);
+
       // Make previously selected marker smaller again
       if (this.selectedMarker)
         this.selectedMarker.setStyle({ radius: MARKER_RADIUS });
-      // Make newly selected marker larger
-      e.sourceTarget.setStyle({ radius: MARKER_RADIUS_SELECTED });
-      // Store newly selected marker so we can make it smaller when the next one's clicked
-      this.selectedMarker = e.sourceTarget;
-      // Find crash that matches coords of marker clicked
-      const crash = crashes.find(
-        (c) => c.lat === e.latlng.lat && c.lon === e.latlng.lng
-      );
-      this.$store.commit("setCurrentCrash", crash);
+
+      const crashId = e.propagatedFrom?.options.crashId;
+
+      // If we clicked on a crash that's not already selected, select that crash
+      if (crashId && crashId !== this.$store.state.currentCrash?.id) {
+        // Make newly selected marker larger
+        e.propagatedFrom.setStyle({ radius: MARKER_RADIUS_SELECTED });
+        // Store newly selected marker so we can make it smaller when the next one's clicked
+        this.selectedMarker = e.propagatedFrom;
+        // Find crash that matches the marker clicked
+        const crash = crashes.find((c) => c.id === crashId);
+        // Set crash in global state
+        this.$store.commit("setCurrentCrash", crash);
+      } else {
+        // If there is no crash ID or we clicked on the already-selected crash, clear selection
+        this.selectedMarker = null;
+        this.$store.commit("setCurrentCrash", null);
+      }
     },
     handleRouteReady() {
       if (this.$refs.route && this.$refs.map) {
@@ -123,6 +139,8 @@ export default {
           fillColor: DEGREE_COLOR_MAP[crash.deg],
           fill: true,
           fillOpacity: 0.8,
+          // Business logic option, not a leaflet option:
+          crashId: crash.id,
         })
       );
 
