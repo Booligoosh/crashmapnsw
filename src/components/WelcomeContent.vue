@@ -2,7 +2,7 @@
   <div class="welcome-content">
     <h3>Welcome!</h3>
     <p>
-      This map shows crashes that occurred between 2016-2020 involving
+      This map shows crashes that occurred between 2017-2021 involving
       <strong>bicycles</strong>.
     </p>
     <p>

@@ -1,7 +1,7 @@
 const fs = require("fs");
 const xlsx = require("xlsx");
 
-const FILE_PREFIX = "NSW_Road_Crash_Data_2016-2020_";
+const FILE_PREFIX = "NSW_Road_Crash_Data_2017-2021_";
 
 const trafficUnitData = getJsonFromExcelFile(FILE_PREFIX + "TRAFFIC_UNIT.xlsx");
 console.log(trafficUnitData[0]);
