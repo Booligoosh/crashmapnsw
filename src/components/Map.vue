@@ -8,7 +8,9 @@
     ]"
     :zoom="14"
     :zoomAnimation="true"
+    :options="{ preferCanvas: true }"
     ref="map"
+    @ready="updateMapMarkers"
   >
     <l-tile-layer
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -45,17 +47,6 @@
       :visible="false"
     ></l-tile-layer>
     <l-control-layers />
-    <l-circle-marker
-      v-for="crash of crashes"
-      :key="crash.id"
-      :lat-lng="[crash.lat, crash.lon]"
-      :radius="$store.state.currentCrash?.id === crash.id ? 14 : 8"
-      @click="handleClick"
-      :color="getColorForDegree(crash.deg)"
-      :fill-color="getColorForDegree(crash.deg)"
-      :fill="true"
-      :fill-opacity="0.8"
-    />
     <l-polyline
       v-if="$store.state.routeCoords"
       :lat-lngs="$store.state.routeCoords"
@@ -77,7 +68,11 @@ import {
   LMarker,
   LPolyline,
 } from "@vue-leaflet/vue-leaflet";
+import * as L from "leaflet/dist/leaflet-src.esm"; // for some reason `from "leaflet"` doesn't work
 import { DEGREE_COLOR_MAP } from "../constants";
+
+const MARKER_RADIUS = 8;
+const MARKER_RADIUS_SELECTED = 14;
 
 export default {
   components: {
@@ -89,10 +84,20 @@ export default {
     LPolyline,
   },
   data() {
-    return { crashes };
+    return {
+      crashes,
+      selectedMarker: null,
+    };
   },
   methods: {
     handleClick(e) {
+      // Make previously selected marker smaller again
+      if (this.selectedMarker)
+        this.selectedMarker.setStyle({ radius: MARKER_RADIUS });
+      // Make newly selected marker larger
+      e.sourceTarget.setStyle({ radius: MARKER_RADIUS_SELECTED });
+      // Store newly selected marker so we can make it smaller when the next one's clicked
+      this.selectedMarker = e.sourceTarget;
       // Find crash that matches coords of marker clicked
       const crash = crashes.find(
         (c) => c.lat === e.latlng.lat && c.lon === e.latlng.lng
@@ -106,8 +111,23 @@ export default {
         map.flyToBounds(bounds);
       }
     },
-    getColorForDegree(degree) {
-      return DEGREE_COLOR_MAP[degree] || "blue"; // Eye-burn blue so I notice something's wrong hopefully
+    // Using this rather than <l-circle-marker> for performance reasons.
+    // vue-leaflet can't handle advanced logic like bulk rendering (featureGroup) or selective updates
+    updateMapMarkers() {
+      const map = this.$refs.map.leafletObject;
+
+      const markersArray = crashes.map((crash) =>
+        L.circleMarker([crash.lat, crash.lon], {
+          radius: MARKER_RADIUS,
+          color: DEGREE_COLOR_MAP[crash.deg],
+          fillColor: DEGREE_COLOR_MAP[crash.deg],
+          fill: true,
+          fillOpacity: 0.8,
+        })
+      );
+
+      const featureGroup = L.featureGroup(markersArray).addTo(map);
+      featureGroup.on("click", this.handleClick);
     },
   },
 };
