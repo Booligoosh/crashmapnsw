@@ -7,8 +7,24 @@
       151.2082848,
     ]"
     :zoom="14"
+    :zoomAnimation="true"
     ref="map"
   >
+    <l-tile-layer
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      layer-type="base"
+      name="Detailed map style"
+      :max-zoom="19"
+      attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+    ></l-tile-layer>
+    <l-tile-layer
+      url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+      layer-type="base"
+      name="Cycling map style"
+      :max-zoom="20"
+      attribution="<a href='https://github.com/cyclosm/cyclosm-cartocss-style/releases' title='CyclOSM - Open Bicycle render'>CyclOSM</a> | Map data: &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+      :visible="false"
+    ></l-tile-layer>
     <l-tile-layer
       url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
       layer-type="base"
@@ -18,21 +34,6 @@
       attribution="Map tiles by <a href='http://stamen.com'>Stamen Design</a>, <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a> &mdash; Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
       subdomains="abcd"
       :opacity="0.8"
-    ></l-tile-layer>
-    <l-tile-layer
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      layer-type="base"
-      name="Detailed map style"
-      :max-zoom="19"
-      attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
-      :visible="false"
-    ></l-tile-layer>
-    <l-tile-layer
-      url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
-      layer-type="base"
-      name="Cycling map style"
-      :max-zoom="20"
-      attribution="<a href='https://github.com/cyclosm/cyclosm-cartocss-style/releases' title='CyclOSM - Open Bicycle render'>CyclOSM</a> | Map data: &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
       :visible="false"
     ></l-tile-layer>
     <l-tile-layer
@@ -76,6 +77,7 @@ import {
   LMarker,
   LPolyline,
 } from "@vue-leaflet/vue-leaflet";
+import { DEGREE_COLOR_MAP } from "../constants";
 
 export default {
   components: {
@@ -105,20 +107,7 @@ export default {
       }
     },
     getColorForDegree(degree) {
-      switch (degree) {
-        case "Non-casualty (towaway)":
-          return "#868e96"; // Gray
-        case "Minor/Other Injury":
-          return "#339af0"; // Blue
-        case "Moderate Injury":
-          return "#fab005"; // Yellow
-        case "Serious Injury":
-          return "#f76707"; // Orange
-        case "Fatal":
-          return "#c92a2a"; // Red
-        default:
-          return "blue"; // Eye-burn blue so I notice something's wrong hopefully
-      }
+      return DEGREE_COLOR_MAP[degree] || "blue"; // Eye-burn blue so I notice something's wrong hopefully
     },
   },
 };

@@ -1,8 +1,10 @@
 <template>
   <aside class="sidebar">
-    <div class="sidebar-top">
+    <div class="sidebar-top" v-if="!isEmbed">
       <h1 class="sidebar-top-logo">BikeSafe<span>NSW</span></h1>
     </div>
+    <CrashDetails />
+    <FileUpload v-if="!isEmbed" />
     <div class="sidebar-credits">
       Made by <a href="https://ethan.link" target="_blank">Ethan</a>. Data from
       <a
@@ -14,8 +16,6 @@
         >GitHub</a
       >. In beta 🚧
     </div>
-    <CrashDetails />
-    <FileUpload />
   </aside>
 </template>
 
@@ -25,6 +25,11 @@ import CrashDetails from "./CrashDetails.vue";
 
 export default {
   components: { FileUpload, CrashDetails },
+  computed: {
+    isEmbed() {
+      return this.$route.query.embed === "1";
+    },
+  },
 };
 </script>
 
@@ -70,6 +75,7 @@ export default {
 
     a {
       color: inherit;
+      font-weight: inherit;
     }
   }
 }

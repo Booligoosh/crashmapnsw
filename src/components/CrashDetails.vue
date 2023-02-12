@@ -1,6 +1,6 @@
 <template>
   <div class="crash-details-placeholder" v-if="!crash">
-    Please select a crash
+    <WelcomeContent />
   </div>
   <div class="crash-details" v-else>
     <h3>
@@ -99,18 +99,15 @@
     <div v-for="unit of crash.units" :key="unit.id" class="crash-participant">
       <h5>
         <u>Participant {{ unit.id }}</u>
-        <span
-          :style="{
-            color:
-              unit.role === 'Key traffic unit'
-                ? '#630'
-                : unit.role === 'Other traffic unit'
-                ? '#0066fd'
-                : 'transparent',
-          }"
-        >
-          ●
-        </span>
+        <InlineColorDot
+          :color="
+            unit.role === 'Key traffic unit'
+              ? '#630'
+              : unit.role === 'Other traffic unit'
+              ? '#0066fd'
+              : 'transparent'
+          "
+        />
       </h5>
       <dl>
         <div>
@@ -136,7 +133,11 @@
 </template>
 
 <script>
+import InlineColorDot from "./InlineColorDot.vue";
+import WelcomeContent from "./WelcomeContent.vue";
+
 export default {
+  components: { WelcomeContent, InlineColorDot },
   computed: {
     crash() {
       return this.$store.state.currentCrash;
@@ -180,44 +181,13 @@ export default {
 .crash-details,
 .crash-details-placeholder {
   flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .crash-details {
-  overflow-y: auto;
-  overflow-x: hidden;
-
   pre {
     overflow-x: auto;
-  }
-
-  dl {
-    margin: 0;
-
-    &:not(:last-child) {
-      margin-bottom: 0.5rem;
-    }
-
-    > div {
-      font-size: 0.9rem;
-
-      &:not(:last-child) {
-        margin-bottom: 0.5rem;
-      }
-
-      dt {
-        display: inline;
-        font-weight: 600;
-
-        &:after {
-          content: ": ";
-        }
-      }
-
-      dd {
-        display: inline;
-        margin: 0;
-      }
-    }
   }
 
   h3 {

@@ -26,4 +26,39 @@ body {
   color: #2c3e50;
   margin: 0;
 }
+
+a {
+  color: hsl(200, 90%, 38%);
+  font-weight: 600;
+}
+
+dl {
+  margin: 0;
+
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  > div {
+    font-size: 0.9rem;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+
+    dt {
+      display: inline;
+      font-weight: 600;
+
+      &:after {
+        content: ": ";
+      }
+    }
+
+    dd {
+      display: inline;
+      margin: 0;
+    }
+  }
+}
 </style>
