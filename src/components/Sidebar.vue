@@ -1,7 +1,7 @@
 <template>
   <aside class="sidebar">
     <div class="sidebar-top" v-if="!isEmbed">
-      <h1 class="sidebar-top-logo">BikeSafe<span>NSW</span></h1>
+      <h1 class="sidebar-top-logo">CrashMap<span>NSW</span></h1>
     </div>
     <CrashDetails />
     <FileUpload v-if="!isEmbed" />

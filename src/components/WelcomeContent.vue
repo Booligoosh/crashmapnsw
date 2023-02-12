@@ -2,7 +2,8 @@
   <div class="welcome-content">
     <h3>Welcome!</h3>
     <p>
-      This map shows crashes that occurred between 2016-2020 involving bicycles.
+      This map shows crashes that occurred between 2016-2020 involving
+      <strong>bicycles</strong>.
     </p>
     <p>
       The data was collected by Transport for NSW, and you can view the same
