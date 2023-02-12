@@ -110,6 +110,12 @@ export default {
 
 <style lang="scss">
 .welcome-content {
+  padding-top: 0.5rem;
+
+  > :first-child {
+    margin-top: 0;
+  }
+
   strong {
     font-weight: 600;
   }
