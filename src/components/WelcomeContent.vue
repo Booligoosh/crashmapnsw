@@ -6,17 +6,27 @@
       <strong>bicycles</strong>.
     </p>
     <p>
-      The data was collected by Transport for NSW, and you can view the same
-      data
+      The data was collected by
       <a
         href="https://roadsafety.transport.nsw.gov.au/statistics/interactivecrashstats/lga_stats.html"
         target="_blank"
-        >on their website</a
-      >.
+        >Transport for NSW</a
+      >. It only includes crashes that were reported to the police and involved
+      an injury or tow-away.
     </p>
+    <!-- <ul>
+      <li>Were reported to police</li>
+      <li>Occurred on a road open to the public</li>
+      <li>Involved at least one moving road vehicle</li>
+      <li>
+        Involved at least one person being killed or injured or at least one
+        motor vehicle being towed away.
+      </li>
+    </ul> -->
     <p>
-      The dots on the map show the locations of crashes, coloured based on the
-      severity of the crash. You can read the definitions below.
+      The dots on the map show the locations of crashes.
+      <strong>Click on a dot to see more information about the crash.</strong>
+      Dots are coloured based on the severity of the crash, as defined below.
     </p>
     <h3>Crash severities</h3>
     <p>
@@ -97,3 +107,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.welcome-content {
+  strong {
+    font-weight: 600;
+  }
+}
+</style>
